@@ -41,15 +41,25 @@ pub fn count_safe_reports(reports: &[Vec<i32>]) -> i32 {
     while selected < n {
         let mut prev_diff: Option<i32> = None;
         let mut is_safe = true;
-        for i in 0..reports[selected].len() - 1 {
-            let diff = reports[selected][i] - reports[selected][i + 1];
+        let mut skip = 0;
+        while skip < reports[selected].len() {
+            let mut report = Vec::new();
+            report.extend_from_slice(&reports[selected][0..skip]);
+            report.extend_from_slice(&reports[selected][skip + 1..]);
+            for i in 0..report.len() - 1 {
+                let diff = report[i] - report[i + 1];
 
-            is_safe = is_report_safe(&prev_diff, &diff);
+                is_safe = is_report_safe(&prev_diff, &diff);
 
-            if !is_safe {
+                if !is_safe {
+                    break;
+                }
+                prev_diff = Some(diff);
+            }
+            if is_safe {
                 break;
             }
-            prev_diff = Some(diff);
+            skip += 1;
         }
 
         res += if is_safe { 1 } else { 0 };
