@@ -12,10 +12,10 @@ pub fn main() {
         matrix.push(parsed_line);
     }
 
-    println!("{:?}", find_x_mas_count(&mut matrix));
+    println!("{:?}", find_x_mas_count(&matrix));
 }
 
-fn find_word_count(word: &str, hay: &mut [Vec<char>]) -> i32 {
+fn find_word_count(word: &str, hay: &[Vec<char>]) -> i32 {
     let mut count = 0;
     let word_len = word.len();
     let height = hay.len();
@@ -133,7 +133,7 @@ fn find_word_count(word: &str, hay: &mut [Vec<char>]) -> i32 {
     count
 }
 
-fn find_x_mas_count(hay: &mut [Vec<char>]) -> i32 {
+fn find_x_mas_count(hay: &[Vec<char>]) -> i32 {
     let mut count = 0;
     let height = hay.len();
     let width = hay.len();
