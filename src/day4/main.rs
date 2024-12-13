@@ -12,7 +12,7 @@ pub fn main() {
         matrix.push(parsed_line);
     }
 
-    println!("{:?}", find_word_count("XMAS", &mut matrix));
+    println!("{:?}", find_x_mas_count(&mut matrix));
 }
 
 fn find_word_count(word: &str, hay: &mut [Vec<char>]) -> i32 {
@@ -127,6 +127,26 @@ fn find_word_count(word: &str, hay: &mut [Vec<char>]) -> i32 {
                         count += 1;
                     }
                 }
+            }
+        }
+    }
+    count
+}
+
+fn find_x_mas_count(hay: &mut [Vec<char>]) -> i32 {
+    let mut count = 0;
+    let height = hay.len();
+    let width = hay.len();
+
+    for i in 1..height - 1 {
+        for j in 1..width - 1 {
+            if hay[i][j] == 'A'
+                && ((hay[i - 1][j - 1] == 'M' && hay[i + 1][j + 1] == 'S')
+                    || (hay[i - 1][j - 1] == 'S' && hay[i + 1][j + 1] == 'M'))
+                && ((hay[i - 1][j + 1] == 'M' && hay[i + 1][j - 1] == 'S')
+                    || (hay[i - 1][j + 1] == 'S' && hay[i + 1][j - 1] == 'M'))
+            {
+                count += 1;
             }
         }
     }
