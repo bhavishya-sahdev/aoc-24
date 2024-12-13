@@ -26,10 +26,10 @@ pub fn main() {
         updates.push(update);
     }
 
-    println!("{:?}", find_good_updates(&order, &updates));
+    println!("{:?}", find_good_updates(&order, &mut updates));
 }
 
-fn find_good_updates(order: &HashSet<(i32, i32)>, updates: &[Vec<i32>]) -> i32 {
+fn find_good_updates(order: &HashSet<(i32, i32)>, updates: &mut [Vec<i32>]) -> i32 {
     let mut res = 0;
     for update in updates {
         let mut valid = true;
@@ -40,14 +40,11 @@ fn find_good_updates(order: &HashSet<(i32, i32)>, updates: &[Vec<i32>]) -> i32 {
 
                 if order.contains(&(page2, page1)) {
                     valid = false;
-                    break;
+                    update.swap(i, j);
                 }
             }
-            if !valid {
-                break;
-            }
         }
-        if valid {
+        if !valid {
             res += update[update.len() / 2]
         }
     }
