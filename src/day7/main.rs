@@ -39,8 +39,12 @@ fn solve(equation: &mut EquationType, solved: &mut bool, curr: i64, index: usize
         }
     }
 
+    let val = (curr.to_string() + &equation.1[index].to_string())
+        .parse::<i64>()
+        .expect("not a number");
     solve(equation, solved, curr + equation.1[index], index + 1);
     solve(equation, solved, curr * equation.1[index], index + 1);
+    solve(equation, solved, val, index + 1);
 }
 
 fn eval_expressions(equations: &mut Vec<EquationType>) -> i64 {
