@@ -47,24 +47,13 @@ fn find_pairs(grid: &mut [Vec<char>]) -> usize {
                     values[j].1 as i32 - values[i].1 as i32,
                 );
 
-                let possible_pos = [1, -1].into_iter().flat_map(|sign| {
-                    [values[i], values[j]].map(|p| {
-                        (
-                            p.0 as i32 + sign * distance.0,
-                            p.1 as i32 + sign * distance.1,
-                        )
-                    })
-                });
-
-                for pos in possible_pos {
-                    let pos_usize = (pos.0 as usize, pos.1 as usize);
-                    if pos.0 >= 0
-                        && pos.0 < height as i32
-                        && pos.1 >= 0
-                        && pos.1 < width as i32
-                        && !values.contains(&pos_usize)
+                for &(idx, dir) in &[(i, -1), (j, 1)] {
+                    let mut pos = (values[idx].0 as i32, values[idx].1 as i32);
+                    while pos.0 >= 0 && pos.0 < height as i32 && pos.1 >= 0 && pos.1 < width as i32
                     {
-                        antinodes.insert(pos_usize);
+                        antinodes.insert((pos.0 as usize, pos.1 as usize));
+                        pos.0 += distance.0 * dir;
+                        pos.1 += distance.1 * dir;
                     }
                 }
             });
