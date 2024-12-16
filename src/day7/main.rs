@@ -1,4 +1,4 @@
-use std::{collections::HashSet, fs};
+use std::fs;
 
 type EquationType = (i64, Vec<i64>);
 
@@ -12,7 +12,6 @@ pub fn main() {
     for line in &content {
         let eq_str: Vec<&str> = line.split(": ").collect();
         let test_nums_str: Vec<&str> = eq_str[1].split_whitespace().collect();
-        let test_val = eq_str[0].parse::<i64>().expect("not a number");
         let mut test_num_val: Vec<i64> = vec![];
         for num in test_nums_str {
             test_num_val.push(num.parse::<i64>().expect("not a number"));
