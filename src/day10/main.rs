@@ -28,6 +28,7 @@ fn dfs(pos: &(usize, usize), grid: &Grid, visited: &mut HashSet<(usize, usize)>)
     if left.ne(pos) && !visited.contains(&left) && grid[left.0][left.1] == grid[pos.0][pos.1] + 1 {
         visited.insert(left);
         sum += dfs(&left, grid, visited);
+        visited.remove(&left);
     }
     if right.ne(pos)
         && !visited.contains(&right)
@@ -35,14 +36,17 @@ fn dfs(pos: &(usize, usize), grid: &Grid, visited: &mut HashSet<(usize, usize)>)
     {
         visited.insert(right);
         sum += dfs(&right, grid, visited);
+        visited.remove(&right);
     }
     if up.ne(pos) && !visited.contains(&up) && grid[up.0][up.1] == grid[pos.0][pos.1] + 1 {
         visited.insert(up);
         sum += dfs(&up, grid, visited);
+        visited.remove(&up);
     }
     if down.ne(pos) && !visited.contains(&down) && grid[down.0][down.1] == grid[pos.0][pos.1] + 1 {
         visited.insert(down);
         sum += dfs(&down, grid, visited);
+        visited.remove(&down);
     }
 
     sum
