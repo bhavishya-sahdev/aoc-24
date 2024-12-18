@@ -56,7 +56,6 @@ fn blink_stones(stones: &[i64], blinks: i32) -> usize {
 
     let mut size = 0;
     for stone in stones {
-        println!("{stone}");
         size += check_and_mutate_stone(stone, blinks, &mut states);
     }
 
