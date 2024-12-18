@@ -11,7 +11,7 @@ pub fn main() {
         let digits: Vec<char> = line.chars().collect();
         grid.push(digits.iter().map(|c| (*c as u8 - b'0') as i32).collect());
     });
-    path_finder(&grid);
+    println!("{}", path_finder(&grid));
 }
 
 fn dfs(pos: &(usize, usize), grid: &Grid, visited: &mut HashSet<(usize, usize)>) -> i32 {
@@ -52,7 +52,7 @@ fn dfs(pos: &(usize, usize), grid: &Grid, visited: &mut HashSet<(usize, usize)>)
     sum
 }
 
-pub fn path_finder(grid: &Grid) {
+pub fn path_finder(grid: &Grid) -> i32 {
     let height = grid.len();
     let width = grid[0].len();
     let mut sum = 0;
@@ -72,5 +72,5 @@ pub fn path_finder(grid: &Grid) {
         })
     });
 
-    println!("{sum:?}");
+    sum
 }
