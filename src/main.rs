@@ -1,5 +1,5 @@
-use aoc::day12;
+use aoc::day13;
 
 fn main() {
-    day12::main();
+    day13::main();
 }
